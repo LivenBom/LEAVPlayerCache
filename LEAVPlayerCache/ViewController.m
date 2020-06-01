@@ -19,13 +19,7 @@
 
 #import "ViewController.h"
 #import <AVFoundation/AVFoundation.h>
-#import <CoreServices/CoreServices.h>
-#import "LERequestDowndloader.h"
-#import "LERequestCacheManager.h"
-
 #import "LEResourceLoaderManager.h"
-
-#define kScheme @"scheme"
 
 @interface ViewController ()
 @property (nonatomic, strong) AVPlayer *player;
@@ -66,7 +60,6 @@
     _playerLayer.videoGravity = AVLayerVideoGravityResizeAspect;
     _playerLayer.frame = CGRectMake(0, 0, [UIScreen mainScreen].bounds.size.width, [UIScreen mainScreen].bounds.size.height);
     [self.view.layer addSublayer:_playerLayer];
-    
 }
 
 

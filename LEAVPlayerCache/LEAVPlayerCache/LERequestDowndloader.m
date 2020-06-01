@@ -55,7 +55,7 @@
     // 获取请求范围
     AVAssetResourceLoadingDataRequest *dataRequest = self.loadingRequest.dataRequest;
     long long offset = dataRequest.requestedOffset;
-    NSInteger length = dataRequest.requestedLength;
+    long long length = dataRequest.requestedLength;
     if (dataRequest.currentOffset != 0) {
         offset = dataRequest.currentOffset;
     }
@@ -65,7 +65,7 @@
     }
     
     // 根据range与本地缓存对比切分为若干个local和remote
-    self.fragments = [[self.cacheManager calculateRangeForRange:NSMakeRange(offset, length)] mutableCopy];
+    self.fragments = [[self.cacheManager calculateRangeForRange:NSMakeRange((NSUInteger)offset, (NSUInteger)length)] mutableCopy];
     // 原来的请求
     self.requestURL = self.cacheManager.url;
     // 处理fragments
@@ -146,7 +146,7 @@
 
 - (void)URLSession:(NSURLSession *)session dataTask:(NSURLSessionDataTask *)dataTask didReceiveData:(NSData *)data {
     [self.loadingRequest.dataRequest respondWithData:data];
-    [self.cacheManager writeData:data range:NSMakeRange(self.currentOffset, data.length) error:nil];
+    [self.cacheManager writeData:data range:NSMakeRange((NSUInteger)self.currentOffset,(NSUInteger)data.length) error:nil];
     self.currentOffset += data.length;
     
     NSLog(@"已下载：%f M",self.currentOffset/1024.0/1024.0);

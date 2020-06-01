@@ -159,18 +159,18 @@
 		33EDF45D2484DC04005BA703 /* LEAVPlayerCache */ = {
 			isa = PBXGroup;
 			children = (
-				33EDF45E2484DC04005BA703 /* LEResourceLoader.h */,
-				33EDF45F2484DC04005BA703 /* LERequestFragment.m */,
 				33EDF4602484DC04005BA703 /* LEResourceLoaderManager.h */,
-				33EDF4612484DC04005BA703 /* LERequestDowndloader.h */,
-				33EDF4622484DC04005BA703 /* LERequestContentInfo.h */,
-				33EDF4632484DC04005BA703 /* LERequestCacheManager.m */,
-				33EDF4642484DC04005BA703 /* LERequestFragment.h */,
-				33EDF4652484DC04005BA703 /* LEResourceLoader.m */,
 				33EDF4662484DC04005BA703 /* LEResourceLoaderManager.m */,
-				33EDF4672484DC04005BA703 /* LERequestCacheManager.h */,
-				33EDF4682484DC04005BA703 /* LERequestContentInfo.m */,
+				33EDF45E2484DC04005BA703 /* LEResourceLoader.h */,
+				33EDF4652484DC04005BA703 /* LEResourceLoader.m */,
+				33EDF4612484DC04005BA703 /* LERequestDowndloader.h */,
 				33EDF4692484DC04005BA703 /* LERequestDowndloader.m */,
+				33EDF4672484DC04005BA703 /* LERequestCacheManager.h */,
+				33EDF4632484DC04005BA703 /* LERequestCacheManager.m */,
+				33EDF4622484DC04005BA703 /* LERequestContentInfo.h */,
+				33EDF4682484DC04005BA703 /* LERequestContentInfo.m */,
+				33EDF4642484DC04005BA703 /* LERequestFragment.h */,
+				33EDF45F2484DC04005BA703 /* LERequestFragment.m */,
 			);
 			path = LEAVPlayerCache;
 			sourceTree = "<group>";

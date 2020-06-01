@@ -26,9 +26,14 @@
 + (instancetype)contentInfoWithFilePath:(NSString *)filePath {
     filePath = [filePath stringByReplacingOccurrencesOfString:filePath.pathExtension withString:@"archive"];
     
-    NSError *error = nil;
-    NSData *data = [NSData dataWithContentsOfFile:filePath];
-    LERequestContentInfo *contentInfo = [NSKeyedUnarchiver unarchivedObjectOfClass:[LERequestContentInfo class] fromData:data error:&error];
+    LERequestContentInfo *contentInfo;
+    if (@available(iOS 11.0, *)) {
+        NSError *error = nil;
+        NSData *data = [NSData dataWithContentsOfFile:filePath];
+        contentInfo = [NSKeyedUnarchiver unarchivedObjectOfClass:[LERequestContentInfo class] fromData:data error:&error];
+    }else{
+        contentInfo = [NSKeyedUnarchiver unarchiveObjectWithFile:filePath];
+    }
     
     if (!contentInfo) {
         contentInfo = [[LERequestContentInfo alloc]init];
@@ -61,10 +66,23 @@
 /// 归档
 - (void)save {
     @synchronized (self.fragmengs) {
-        NSError *error;
-        NSData *archivedData = [NSKeyedArchiver archivedDataWithRootObject:self requiringSecureCoding:YES error:&error];
-        if (!error) {
-            [archivedData writeToFile:self.filePath atomically:nil];
+        BOOL isSuccess = YES;
+        if (@available(iOS 11.0, *)) {
+            NSError *error;
+            NSData *archivedData = [NSKeyedArchiver archivedDataWithRootObject:self requiringSecureCoding:YES error:&error];
+            if (!error) {
+                isSuccess = [archivedData writeToFile:self.filePath atomically:YES];
+            }else{
+                isSuccess = NO;
+            }
+        }
+        else{
+            isSuccess = [NSKeyedArchiver archiveRootObject:self toFile:self.filePath];
+        }
+        
+        // 如果保存失败，则遗弃
+        if (!isSuccess) {
+            [self.fragmengs removeLastObject];
         }
     }
 }
